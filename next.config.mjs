@@ -21,6 +21,15 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  webpack(config, { isServer }) {
+    // Adjusting file size limits to allow larger assets
+    config.performance = {
+      maxAssetSize: 50 * 1024 * 1024, // 50 MB (default is 250 KB)
+      maxEntrypointSize: 50 * 1024 * 1024, // 50 MB
+    };
+
+    return config;
+  }
 }
 
 mergeConfig(nextConfig, userConfig)
